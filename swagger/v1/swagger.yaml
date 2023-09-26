@@ -1,0 +1,328 @@
+---
+openapi: 3.0.1
+info:
+  title: API Portifolios V1
+  version: v1
+paths:
+  api/wanteds:
+    post:
+      summary: Cria procurados do sistema
+      tags:
+      - Wanted
+      parameters: []
+      responses:
+        '201':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                  example: Alexsandro Perreira da Silva
+                  description: Nome dos procurados
+                data_aniversario_usada:
+                  type: string
+                  example: 12/09/2001
+                  description: Data de aniversário que o procurado usou
+                cabelo:
+                  type: string
+                  example: Black
+                  description: Cor do cabelo
+                olhos:
+                  type: string
+                  example: Brown
+                  description: Cor dos olhos
+                sexo:
+                  type: string
+                  example: Male
+                  description: Gênero do procurado
+                peso:
+                  type: string
+                  example: 87 kg
+                  description: Peso do procurado
+                altura:
+                  type: string
+                  example: 1.72 cm
+                  description: Altura do procurado
+                raca:
+                  type: string
+                  example: Asian
+                  description: Etnia do procurado
+                nacionalidade:
+                  type: string
+                  example: Brazilian
+                  description: Nascionalidade do procurado
+                crime:
+                  type: string
+                  example: Morder
+                  description: Crime cometido pelo procurado
+                url_foto:
+                  type: string
+                  example: https://ws-public.interpol.int/notices/v1/red/2023-61947/images
+                  description: Url da foto do procurado
+                origem:
+                  type: string
+                  example: FBI
+                  description: Lugar de extração do dado
+    get:
+      summary: Lista procurados do sistema
+      tags:
+      - Wanted
+      parameters:
+      - name: id
+        in: query
+        description: Parâmetro ID para filtrar procurados
+        schema:
+          type: integer
+      - name: nome
+        in: query
+        description: Nome dos procurados
+        schema:
+          type: string
+      - name: data_aniversario_usada
+        in: query
+        description: Data de aniversário que o procurado usou
+        required: false
+        schema:
+          type: string
+      - name: cabelo
+        in: query
+        description: Cor do cabelo
+        required: false
+        schema:
+          type: string
+      - name: olhos
+        in: query
+        description: Cor dos olhos
+        required: false
+        schema:
+          type: integer
+      - name: sexo
+        in: query
+        description: Sexo do procurado
+        required: false
+        schema:
+          type: integer
+      - name: peso
+        in: query
+        description: Peso do procurado
+        required: false
+        schema:
+          type: integer
+      - name: altura
+        in: query
+        description: Altura do procurado
+        required: false
+        schema:
+          type: string
+      - name: raca
+        in: query
+        description: Etnia do procurado
+        required: false
+        schema:
+          type: string
+      - name: nacionalidade
+        in: query
+        description: Nascionalidade do procurado
+        required: false
+        schema:
+          type: string
+      - name: crime
+        in: query
+        description: Crime cometido pelo procurado
+        required: false
+        schema:
+          type: integer
+      - name: url_foto
+        in: query
+        description: Url da foto do procurado
+        required: false
+        schema:
+          type: integer
+      - name: origem
+        in: query
+        description: De qual lugar o dado foi buscado
+        required: false
+        schema:
+          type: integer
+      - name: created_at
+        in: query
+        description: Data de criação do registro no banco de dados
+        required: false
+        schema:
+          type: string
+      - name: updated_at
+        in: query
+        description: Data de ultima atualização do registro no banco de dados
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID unico incremental do registro na tabela
+                    nullable: false
+                  nome:
+                    type: string
+                    description: Nome do procurado
+                    nullable: false
+                  data_aniversario_usada:
+                    type: string
+                    description: Data de anmiversário que o procurado usou
+                  cabelo:
+                    type: string
+                    description: Cor do cabelo do procurado
+                  olhos:
+                    type: string
+                    description: Cor dos olhos do procurado
+                  sexo:
+                    type: string
+                    description: Gênero do procurado
+                  peso:
+                    type: integer
+                    description: Peso do procurado
+                    nullable: false
+                  altura:
+                    type: string
+                    description: Altura do procurado
+                    nullable: false
+                  raca:
+                    type: string
+                    description: Etnia do procurado
+                  nacionalidade:
+                    type: string
+                    description: Nascionalidade do procurado
+                  crime:
+                    type: string
+                    description: Crime cometido pelo procurado
+                  url_foto:
+                    type: string
+                    description: Url da foto do procurado
+                  origem:
+                    type: string
+                    description: De qual lugar o dado foi buscado
+                  created_at:
+                    type: string
+                    description: Data de criação do registro no banco de dados
+                  updated_at:
+                    type: string
+                    description: Data de ultima atualização do registro no banco de
+                      dados
+  api/wanteds/{id}:
+    delete:
+      summary: Deleta procurados do sistema
+      tags:
+      - Wanted
+      parameters:
+      - name: id
+        in: path
+        description: 'Parâmetro ID '
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: deleted
+        '404':
+          description: not found
+        '422':
+          description: unprocessable entity
+    put:
+      summary: Atualiza procurados do sistema
+      tags:
+      - Wanted
+      parameters:
+      - name: id
+        in: path
+        description: Parâmetro ID para filtrar procurados
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID unico incremental do registro na tabela
+                    nullable: false
+                  nome:
+                    type: string
+                    description: Nome do procurado
+                    nullable: false
+                  data_aniversario_usada:
+                    type: string
+                    description: Data de aniversário que o procurado usou
+                  cabelo:
+                    type: string
+                    description: Cor do cabelo do procurado
+                  olhos:
+                    type: string
+                    description: Cor dos olhos do procurado
+                  sexo:
+                    type: string
+                    description: Gênero do procurado
+                  peso:
+                    type: integer
+                    description: Peso do procurado
+                    nullable: false
+                  altura:
+                    type: string
+                    description: Altura do procurado
+                    nullable: false
+                  raca:
+                    type: string
+                    description: Etnia do procurado
+                  nacionalidade:
+                    type: string
+                    description: Nascionalidade do procurado
+                  crime:
+                    type: string
+                    description: Crime cometido pelo procurado
+                  url_foto:
+                    type: string
+                    description: Url da foto do procurado
+                  origem:
+                    type: string
+                    description: De qual lugar o dado foi buscado
+                  created_at:
+                    type: string
+                    description: Data de criação do registro no banco de dados
+                  updated_at:
+                    type: string
+                    description: Data de ultima atualização do registro no banco de
+                      dados
+servers:
+- url: http://localhost:3000
+  description: Url do ambiente local
+components:
+  schemas:
+    pagination:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Devolve os registros em uma lista
+          items: []
+        page:
+          type: integer
+          description: 'Pagina atual, possivel navegar entre pagina trocando os parametros,
+            ex: page=1, page=2, page=n'
+        per_page:
+          type: integer
+          description: 'Quantidade de registros por página, máximo: 1000, ex: per_page=20,
+            per_page=200'
