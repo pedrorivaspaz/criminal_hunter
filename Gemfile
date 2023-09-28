@@ -31,6 +31,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 gem 'faraday'
 gem 'will_paginate'
+gem 'pg'
 
 #Swagger documentation
 gem 'rswag'
