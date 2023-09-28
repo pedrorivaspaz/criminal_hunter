@@ -1,0 +1,2 @@
+postdeploy:
+  - rake custom_tasks:execute_background_job
