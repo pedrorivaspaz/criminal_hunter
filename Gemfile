@@ -32,6 +32,7 @@ gem "bootsnap", require: false
 gem 'faraday'
 gem 'will_paginate'
 gem 'pg'
+gem 'rack-cors', require: 'rack/cors'
 
 #Swagger documentation
 gem 'rswag'
