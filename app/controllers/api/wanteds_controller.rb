@@ -4,9 +4,7 @@ class Api::WantedsController < ApplicationController
   # GET /wanteds
   def index
     @wanteds = Wanted.paginate(page: params[:page], per_page: 20)
-
     render json: @wanteds
-    
   end
 
   # POST /wanteds
