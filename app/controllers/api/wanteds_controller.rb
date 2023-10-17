@@ -1,11 +1,23 @@
 class Api::WantedsController < ApplicationController
   before_action :set_wanted, only: %i[ show update destroy ]
+  before_action :set_wanteds, only: %i[ index search ]
+  before_action :authenticate_user!, only: %i[ create update destroy ]
 
-  # GET /wanteds
+# GET /wanteds
   def index
-    @wanteds = Wanted.paginate(page: params[:page], per_page: 20)
+    @wanteds = Wanted.order(id: :asc).paginate(page: params[:page], per_page: 20)
     render json: @wanteds
   end
+
+ 
+  def show
+    if @wanted
+      render json: @wanted, status: :ok
+    else
+      render json: { error: 'Registro não encontrado' }, status: :not_found
+    end
+  end
+
 
   # POST /wanteds
   def create
@@ -32,10 +44,23 @@ class Api::WantedsController < ApplicationController
     @wanted.destroy
   end
 
+  def search
+    if params[:nome].present?
+      @wanteds = Wanted.where("nome ilike ?", "%#{params[:nome]}%").order(:nome)
+      render json: @wanteds
+    else
+      render json: { message: 'Nenhum resultado encontrado' }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_wanted
       @wanted = Wanted.find(params[:id])
+    end
+
+    def set_wanteds
+      @wanteds = Wanted.all
     end
 
     # Only allow a list of trusted parameters through.
