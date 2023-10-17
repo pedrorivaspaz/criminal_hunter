@@ -49,7 +49,8 @@ class Api::WantedsController < ApplicationController
       @wanteds = Wanted.where("nome ilike ?", "%#{params[:nome]}%").order(:nome)
       render json: @wanteds
     else
-      render json: { message: 'Nenhum resultado encontrado' }
+      @wanteds = Wanted.all.order(id: :asc)
+      render json: @wanteds
     end
   end
 
