@@ -1,0 +1,14 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      host: containers-us-west-106.railway.app
+      port: 5953
+      database: railway
+      username: postgres
+      password: X0I0RqHfa7LPZB1IEBdl
