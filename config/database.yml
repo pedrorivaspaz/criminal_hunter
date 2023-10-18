@@ -15,3 +15,10 @@ test:
 
 production:
   <<: *default
+  adapter: postgresql
+  encoding: unicode
+  database: railway
+  username: postgres
+  password: X0I0RqHfa7LPZB1IEBdl
+  host: containers-us-west-106.railway.app
+  port: 5953
