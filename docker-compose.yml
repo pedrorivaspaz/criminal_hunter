@@ -8,7 +8,7 @@ services:
       - "3000:3000"
     environment:
       host: containers-us-west-106.railway.app
-      port: 5953
+      port: "5953:5432"
       database: railway
       username: postgres
       password: X0I0RqHfa7LPZB1IEBdl
