@@ -20,7 +20,7 @@ RSpec.configure do |config|
     'v1/swagger.yaml' => {
       openapi: '3.0.1',
       info: {
-        title: 'API Portifolios V1',
+        title: 'API Procurados V1',
         version: 'v1'
       },
       paths: {},
@@ -28,6 +28,10 @@ RSpec.configure do |config|
         {
           url: 'http://localhost:3000',
           description: 'Url do ambiente local'
+        },
+        {
+          url: 'https://criminalhunter-production.up.railway.app',
+          description: 'Url do ambiente de produção'
         }
       ],
       components: {

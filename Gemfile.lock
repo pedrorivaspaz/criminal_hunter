@@ -133,6 +133,7 @@ GEM
     nokogiri (1.15.4-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pagy (6.1.0)
     pg (1.5.4)
     psych (5.1.0)
       stringio
@@ -224,7 +225,6 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    will_paginate (4.0.0)
     zeitwerk (2.6.11)
 
 PLATFORMS
@@ -236,6 +236,7 @@ DEPENDENCIES
   devise (~> 4.9)
   factory_bot_rails
   faraday
+  pagy
   pg
   puma (~> 5.0)
   rack-cors
@@ -246,7 +247,6 @@ DEPENDENCIES
   rswag-ui
   sqlite3 (~> 1.4)
   tzinfo-data
-  will_paginate
 
 RUBY VERSION
    ruby 3.0.2p107

@@ -30,7 +30,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 gem 'faraday'
-gem 'will_paginate'
+gem 'pagy'
 gem 'pg'
 gem 'rack-cors', require: 'rack/cors'
 

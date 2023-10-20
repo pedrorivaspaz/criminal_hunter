@@ -1,18 +1,40 @@
 require 'swagger_helper'
 
 # to update api-doc: bundle exec rake rswag:specs:swaggerize
-RSpec.describe '/api/wanteds', type: :request do
+RSpec.describe '/api/wanteds/{id}', type: :request do
 
  
-  path '/api/wanteds' do
-    get('Lista procurados do sistema') do
+  path '/api/wanteds/{id}' do
+    get('Busca procurados do sistema pelo ID') do
       tags 'Procurados'
       consumes 'application/json'
       produces 'application/json'
- 
+#     security [basic_auth: []]
+#      parameter name: :authorization,
+#                in: :header,
+#                type: :string,
+#                description: 'Token de autenticação padrão Basic Authentication composto por username e password',
+#                required: true
+      parameter name: :id,
+                in: :query,
+                type: :integer,
+                description: 'ID unico incremental do registro na tabela',
+                required: true
+
+      response 404, 'not_found' do
+        let!(:id) { 1000000000 }
+
+        schema type: :object,
+        properties: {},
+        example: {
+          "error": "Registro não encontrado"
+        }
+
+        run_test!
+      end
 
       response 200, 'successful' do
-        let(:wanteds) { create_list(:wanted) }
+        let!(:id) { create(:wanted).id }
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -20,7 +42,8 @@ RSpec.describe '/api/wanteds', type: :request do
             }
           }
         end
-        schema type: :object,
+
+schema type: :object,
           properties: {
             id: {
               type: :integer,

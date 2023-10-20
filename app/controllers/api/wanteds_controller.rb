@@ -1,21 +1,24 @@
 class Api::WantedsController < ApplicationController
-  before_action :set_wanted, only: %i[ show update destroy ]
-  before_action :set_wanteds, only: %i[ index search ]
-  before_action :authenticate_user!, only: %i[ create update destroy ]
+  include Pagy::Backend
 
-# GET /wanteds
+  before_action :set_wanted, only: [:show, :update, :destroy]
+  before_action :set_wanteds, only: [:index, :search]
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
+
+  # GET /wanteds
   def index
-    @wanteds = Wanted.order(id: :asc).paginate(page: params[:page], per_page: 20)
-    render json: @wanteds
+    begin
+      pagy, @wanteds = pagy(Wanted.order(:id), items: 20)
+      render json: @wanteds
+    rescue Pagy::OverflowError
+      render json: { error: "A página procurada não existe." }, status: :not_found
+    end
   end
 
- 
+
+  # GET /wanteds/1
   def show
-    if @wanted
-      render json: @wanted, status: :ok
-    else
-      render json: { error: 'Registro não encontrado' }, status: :not_found
-    end
+    render json: @wanted
   end
 
 
@@ -44,27 +47,30 @@ class Api::WantedsController < ApplicationController
     @wanted.destroy
   end
 
-  def search
-    if params[:nome].present?
-      @wanteds = Wanted.where("nome ilike ?", "%#{params[:nome]}%").order(:nome)
-      render json: @wanteds
-    else
-      @wanteds = Wanted.all.order(id: :asc)
-      render json: @wanteds
-    end
+  # GET /wanteds/search
+def search
+  if params[:nome].present?
+      @wanteds = Wanted.search_by_nome(params[:nome])
+  else
+    render json: { error: 'Nenhum registro encontrado' }, status: :not_found
   end
 
+  render json: @wanteds
+end
+
+
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_wanted
-      @wanted = Wanted.find(params[:id])
+      @wanted = Wanted.find_by(id: params[:id])
+      unless @wanted
+        render json: { error: 'Registro não encontrado' }, status: :not_found
+      end
     end
 
     def set_wanteds
       @wanteds = Wanted.all
     end
 
-    # Only allow a list of trusted parameters through.
     def wanted_params
       params.require(:wanted).permit(:nome, :data_aniversario_usada, :cabelo, :olhos, :sexo, :peso, :altura, :raca, :nacionalidade, :crime, :url_foto, :origem)
     end

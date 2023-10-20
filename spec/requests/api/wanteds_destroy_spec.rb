@@ -1,12 +1,12 @@
 require 'swagger_helper'
 
 # to update api-doc: bundle exec rake rswag:specs:swaggerize
-RSpec.describe 'api/wanteds/{id}', type: :request do
+RSpec.describe '/api/wanteds/{id}', type: :request do
 
  
-  path 'api/wanteds/{id}' do
+  path '/api/wanteds/{id}' do
     delete('Deleta procurados do sistema') do
-      tags 'Wanted'
+      tags 'Procurados'
       consumes 'application/json'
       produces 'application/json'
  

@@ -2,15 +2,15 @@ Rails.application.routes.draw do
   namespace 'api' do
     resources :wanteds do
       collection do
-        get '/', to: 'wanteds#search'
+       get 'search', to: 'wanteds#search'
       end
     end
   end
 
-#Devise
+  # Devise
   devise_for :users
 
-#Swagger
+  # Swagger
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
 

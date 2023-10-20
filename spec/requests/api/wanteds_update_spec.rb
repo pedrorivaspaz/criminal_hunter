@@ -1,12 +1,12 @@
 require 'swagger_helper'
 
 # to update api-doc: bundle exec rake rswag:specs:swaggerize
-RSpec.describe 'api/wanteds/{id}', type: :request do
+RSpec.describe '/api/wanteds/{id}', type: :request do
 
  
-  path 'api/wanteds/{id}' do
+  path '/api/wanteds/{id}' do
     put('Atualiza procurados do sistema') do
-      tags 'Wanted'
+      tags 'Procurados'
       consumes 'application/json'
       produces 'application/json'
  
@@ -94,7 +94,26 @@ RSpec.describe 'api/wanteds/{id}', type: :request do
               type: :string,
               description: 'Data de ultima atualização do registro no banco de dados'
             }
-          }
+          },
+          example: [
+            {
+              "id": 1,
+              "nome": "João da Silva",
+              "data_aniversario_usada": "10/03/1985",
+              "cabelo": "Preto",
+              "olhos": "Castanho",
+              "sexo": "Masculino",
+              "peso": 75,
+              "altura": "1.75m",
+              "raca": "Branco",
+              "nacionalidade": "Brasileiro",
+              "crime": "Roubo",
+              "url_foto": "https://exemplo.com/foto/joao_silva.jpg",
+              "origem": "Registro Criminal",
+              "created_at": "20/05/2022 14:30:22",
+              "updated_at": "22/05/2022 09:15:37"
+            }
+          ]
         run_test!
       end
     end

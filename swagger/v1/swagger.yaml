@@ -4,163 +4,28 @@ info:
   title: API Procurados V1
   version: v1
 paths:
-  api/wanteds:
-    post:
-      summary: Cria procurados do sistema
-      tags:
-      - Wanted
-      parameters: []
-      responses:
-        '201':
-          description: successful
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                nome:
-                  type: string
-                  example: Alexsandro Perreira da Silva
-                  description: Nome dos procurados
-                data_aniversario_usada:
-                  type: string
-                  example: 12/09/2001
-                  description: Data de aniversário que o procurado usou
-                cabelo:
-                  type: string
-                  example: Black
-                  description: Cor do cabelo
-                olhos:
-                  type: string
-                  example: Brown
-                  description: Cor dos olhos
-                sexo:
-                  type: string
-                  example: Male
-                  description: Gênero do procurado
-                peso:
-                  type: string
-                  example: 87 kg
-                  description: Peso do procurado
-                altura:
-                  type: string
-                  example: 1.72 cm
-                  description: Altura do procurado
-                raca:
-                  type: string
-                  example: Asian
-                  description: Etnia do procurado
-                nacionalidade:
-                  type: string
-                  example: Brazilian
-                  description: Nascionalidade do procurado
-                crime:
-                  type: string
-                  example: Morder
-                  description: Crime cometido pelo procurado
-                url_foto:
-                  type: string
-                  example: https://ws-public.interpol.int/notices/v1/red/2023-61947/images
-                  description: Url da foto do procurado
-                origem:
-                  type: string
-                  example: FBI
-                  description: Lugar de extração do dado
+  "/api/wanteds/{id}":
     get:
-      summary: Lista procurados do sistema
+      summary: Busca procurados do sistema pelo ID
       tags:
-      - Wanted
+      - Procurados
       parameters:
       - name: id
         in: query
-        description: Parâmetro ID para filtrar procurados
+        description: ID unico incremental do registro na tabela
+        required: true
         schema:
           type: integer
-      - name: nome
-        in: query
-        description: Nome dos procurados
-        schema:
-          type: string
-      - name: data_aniversario_usada
-        in: query
-        description: Data de aniversário que o procurado usou
-        required: false
-        schema:
-          type: string
-      - name: cabelo
-        in: query
-        description: Cor do cabelo
-        required: false
-        schema:
-          type: string
-      - name: olhos
-        in: query
-        description: Cor dos olhos
-        required: false
-        schema:
-          type: integer
-      - name: sexo
-        in: query
-        description: Sexo do procurado
-        required: false
-        schema:
-          type: integer
-      - name: peso
-        in: query
-        description: Peso do procurado
-        required: false
-        schema:
-          type: integer
-      - name: altura
-        in: query
-        description: Altura do procurado
-        required: false
-        schema:
-          type: string
-      - name: raca
-        in: query
-        description: Etnia do procurado
-        required: false
-        schema:
-          type: string
-      - name: nacionalidade
-        in: query
-        description: Nascionalidade do procurado
-        required: false
-        schema:
-          type: string
-      - name: crime
-        in: query
-        description: Crime cometido pelo procurado
-        required: false
-        schema:
-          type: integer
-      - name: url_foto
-        in: query
-        description: Url da foto do procurado
-        required: false
-        schema:
-          type: integer
-      - name: origem
-        in: query
-        description: De qual lugar o dado foi buscado
-        required: false
-        schema:
-          type: integer
-      - name: created_at
-        in: query
-        description: Data de criação do registro no banco de dados
-        required: false
-        schema:
-          type: string
-      - name: updated_at
-        in: query
-        description: Data de ultima atualização do registro no banco de dados
-        required: false
-        schema:
-          type: string
       responses:
+        '404':
+          description: not_found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+                example:
+                  error: Registro não encontrado
         '200':
           description: successful
           content:
@@ -218,11 +83,26 @@ paths:
                     type: string
                     description: Data de ultima atualização do registro no banco de
                       dados
-  api/wanteds/{id}:
+                example:
+                - id: 1
+                  nome: João da Silva
+                  data_aniversario_usada: 10/03/1985
+                  cabelo: Preto
+                  olhos: Castanho
+                  sexo: Masculino
+                  peso: 75
+                  altura: 1.75m
+                  raca: Branco
+                  nacionalidade: Brasileiro
+                  crime: Roubo
+                  url_foto: https://exemplo.com/foto/joao_silva.jpg
+                  origem: Registro Criminal
+                  created_at: 20/05/2022 14:30:22
+                  updated_at: 22/05/2022 09:15:37
     delete:
       summary: Deleta procurados do sistema
       tags:
-      - Wanted
+      - Procurados
       parameters:
       - name: id
         in: path
@@ -240,7 +120,7 @@ paths:
     put:
       summary: Atualiza procurados do sistema
       tags:
-      - Wanted
+      - Procurados
       parameters:
       - name: id
         in: path
@@ -306,9 +186,262 @@ paths:
                     type: string
                     description: Data de ultima atualização do registro no banco de
                       dados
+                example:
+                - id: 1
+                  nome: João da Silva
+                  data_aniversario_usada: 10/03/1985
+                  cabelo: Preto
+                  olhos: Castanho
+                  sexo: Masculino
+                  peso: 75
+                  altura: 1.75m
+                  raca: Branco
+                  nacionalidade: Brasileiro
+                  crime: Roubo
+                  url_foto: https://exemplo.com/foto/joao_silva.jpg
+                  origem: Registro Criminal
+                  created_at: 20/05/2022 14:30:22
+                  updated_at: 22/05/2022 09:15:37
+  "/api/wanteds/search?nome={nome}":
+    get:
+      summary: Busca procurados do sistema pelo nome
+      tags:
+      - Procurados
+      parameters:
+      - name: nome
+        in: query
+        description: Nome do procurado
+        required: true
+        schema:
+          type: string
+      responses:
+        '404':
+          description: not_found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+                example: {}
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID unico incremental do registro na tabela
+                    nullable: false
+                  nome:
+                    type: string
+                    description: Nome do procurado
+                    nullable: false
+                  data_aniversario_usada:
+                    type: string
+                    description: Data de anmiversário que o procurado usou
+                  cabelo:
+                    type: string
+                    description: Cor do cabelo do procurado
+                  olhos:
+                    type: string
+                    description: Cor dos olhos do procurado
+                  sexo:
+                    type: string
+                    description: Gênero do procurado
+                  peso:
+                    type: integer
+                    description: Peso do procurado
+                    nullable: false
+                  altura:
+                    type: string
+                    description: Altura do procurado
+                    nullable: false
+                  raca:
+                    type: string
+                    description: Etnia do procurado
+                  nacionalidade:
+                    type: string
+                    description: Nascionalidade do procurado
+                  crime:
+                    type: string
+                    description: Crime cometido pelo procurado
+                  url_foto:
+                    type: string
+                    description: Url da foto do procurado
+                  origem:
+                    type: string
+                    description: De qual lugar o dado foi buscado
+                  created_at:
+                    type: string
+                    description: Data de criação do registro no banco de dados
+                  updated_at:
+                    type: string
+                    description: Data de ultima atualização do registro no banco de
+                      dados
+                example:
+                - id: 1
+                  nome: João da Silva
+                  data_aniversario_usada: 10/03/1985
+                  cabelo: Preto
+                  olhos: Castanho
+                  sexo: Masculino
+                  peso: 75
+                  altura: 1.75m
+                  raca: Branco
+                  nacionalidade: Brasileiro
+                  crime: Roubo
+                  url_foto: https://exemplo.com/foto/joao_silva.jpg
+                  origem: Registro Criminal
+                  created_at: 20/05/2022 14:30:22
+                  updated_at: 22/05/2022 09:15:37
+  "/api/wanteds":
+    post:
+      summary: Cria procurados no sistema
+      tags:
+      - Procurados
+      parameters: []
+      responses:
+        '201':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                  example: Alexsandro Perreira da Silva
+                  description: Nome dos procurados
+                data_aniversario_usada:
+                  type: string
+                  example: 12/09/2001
+                  description: Data de aniversário que o procurado usou
+                cabelo:
+                  type: string
+                  example: Black
+                  description: Cor do cabelo
+                olhos:
+                  type: string
+                  example: Brown
+                  description: Cor dos olhos
+                sexo:
+                  type: string
+                  example: Male
+                  description: Gênero do procurado
+                peso:
+                  type: string
+                  example: 87 kg
+                  description: Peso do procurado
+                altura:
+                  type: string
+                  example: 1.72 cm
+                  description: Altura do procurado
+                raca:
+                  type: string
+                  example: Asian
+                  description: Etnia do procurado
+                nacionalidade:
+                  type: string
+                  example: Brazilian
+                  description: Nascionalidade do procurado
+                crime:
+                  type: string
+                  example: Morder
+                  description: Crime cometido pelo procurado
+                url_foto:
+                  type: string
+                  example: https://ws-public.interpol.int/notices/v1/red/2023-61947/images
+                  description: Url da foto do procurado
+                origem:
+                  type: string
+                  example: FBI
+                  description: Lugar de extração do dado
+    get:
+      summary: Lista procurados do sistema
+      tags:
+      - Procurados
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID unico incremental do registro na tabela
+                    nullable: false
+                  nome:
+                    type: string
+                    description: Nome do procurado
+                    nullable: false
+                  data_aniversario_usada:
+                    type: string
+                    description: Data de anmiversário que o procurado usou
+                  cabelo:
+                    type: string
+                    description: Cor do cabelo do procurado
+                  olhos:
+                    type: string
+                    description: Cor dos olhos do procurado
+                  sexo:
+                    type: string
+                    description: Gênero do procurado
+                  peso:
+                    type: integer
+                    description: Peso do procurado
+                    nullable: false
+                  altura:
+                    type: string
+                    description: Altura do procurado
+                    nullable: false
+                  raca:
+                    type: string
+                    description: Etnia do procurado
+                  nacionalidade:
+                    type: string
+                    description: Nascionalidade do procurado
+                  crime:
+                    type: string
+                    description: Crime cometido pelo procurado
+                  url_foto:
+                    type: string
+                    description: Url da foto do procurado
+                  origem:
+                    type: string
+                    description: De qual lugar o dado foi buscado
+                  created_at:
+                    type: string
+                    description: Data de criação do registro no banco de dados
+                  updated_at:
+                    type: string
+                    description: Data de ultima atualização do registro no banco de
+                      dados
+                example:
+                - id: 1
+                  nome: João da Silva
+                  data_aniversario_usada: 10/03/1985
+                  cabelo: Preto
+                  olhos: Castanho
+                  sexo: Masculino
+                  peso: 75
+                  altura: 1.75m
+                  raca: Branco
+                  nacionalidade: Brasileiro
+                  crime: Roubo
+                  url_foto: https://exemplo.com/foto/joao_silva.jpg
+                  origem: Registro Criminal
+                  created_at: 20/05/2022 14:30:22
+                  updated_at: 22/05/2022 09:15:37
 servers:
 - url: http://localhost:3000
   description: Url do ambiente local
+- url: https://criminalhunter-production.up.railway.app
+  description: Url do ambiente de produção
 components:
   schemas:
     pagination:
