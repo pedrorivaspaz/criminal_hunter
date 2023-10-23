@@ -3,7 +3,7 @@ class Api::WantedsController < ApplicationController
 
   before_action :set_wanted, only: [:show, :update, :destroy]
   before_action :set_wanteds, only: [:index, :search]
-  before_action :authenticate_user!, only: [:create, :update, :destroy]
+  before_action :authenticate_user!, only: [ :create, :update, :destroy]
 
   # GET /wanteds
   def index
