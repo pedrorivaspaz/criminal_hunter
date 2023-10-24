@@ -34,7 +34,6 @@ gem 'pagy'
 gem 'pg'
 gem 'rack-cors', require: 'rack/cors'
 gem 'devise'
-gem 'devise-jwt'
 
 #Swagger documentation
 gem 'rswag'

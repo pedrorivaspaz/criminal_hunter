@@ -1,28 +1,18 @@
-# frozen_string_literal: true
+# app/controllers/users/sessions_controller.rb
 
 class Users::SessionsController < Devise::SessionsController
-  respond_to :json  
-  # before_action :configure_sign_in_params, only: [:create]
+  respond_to :json
 
-  # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+  # POST /users/sign_in
+  def create
+    self.resource = warden.authenticate!(auth_options)
+    sign_in(resource_name, resource)
+    render json: resource
+  end
 
-  # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  private
 
-  # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
-
-  # protected
-
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_in_params
-  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
-  # end
+  def sign_in_params
+    params.require(:user).permit(:login, :password)
+  end
 end
