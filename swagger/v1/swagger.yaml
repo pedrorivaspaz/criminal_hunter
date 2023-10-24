@@ -11,7 +11,7 @@ paths:
       - Procurados
       parameters:
       - name: id
-        in: query
+        in: path
         description: ID unico incremental do registro na tabela
         required: true
         schema:

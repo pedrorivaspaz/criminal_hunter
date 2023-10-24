@@ -16,7 +16,7 @@ RSpec.describe '/api/wanteds/{id}', type: :request do
 #                description: 'Token de autenticação padrão Basic Authentication composto por username e password',
 #                required: true
       parameter name: :id,
-                in: :query,
+                in: :path,
                 type: :integer,
                 description: 'ID unico incremental do registro na tabela',
                 required: true
