@@ -103,7 +103,16 @@ paths:
       summary: Deleta procurados do sistema
       tags:
       - Procurados
+      security:
+      - basic_auth: []
       parameters:
+      - name: Authorization
+        in: header
+        description: Token de autenticação padrão Basic Authentication composto por
+          username e password
+        required: true
+        schema:
+          type: string
       - name: id
         in: path
         description: 'Parâmetro ID '
