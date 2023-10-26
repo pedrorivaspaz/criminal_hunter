@@ -16,8 +16,6 @@ services:
       - gems_web:/usr/local/bundle
     depends_on:
       - db
-    environment:
-      - BEARER_TOKEN=92b689e140f8850a6e627588466c9368
   db:
     restart: always
     image: postgres:13.7
