@@ -36,13 +36,10 @@ module CriminalHunter
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    config.rollbar.access_token = '1e169a2fbd944f54a044b6045631a34f'
-    config.middleware.use "Rollbar::Middleware::Rack"
-
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins "http://localhost:3000", "https://criminal-hunter.vercel.app"
+        origins "http://localhost:3000", "https://criminal-hunter.vercel.app", "https://criminalhunter-production.up.railway.app/api-docs/index.html", "http://localhost:3000/api/wanteds"
         resource "*",
           headers: :any,
           methods: [:get, :post, :put, :patch, :delete, :options, :head]
