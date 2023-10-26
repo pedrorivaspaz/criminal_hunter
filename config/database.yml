@@ -5,7 +5,8 @@ default: &default
   host: containers-us-west-106.railway.app
   username: postgres
   password: X0I0RqHfa7LPZB1IEBdl
-  
+  port: 5953
+
 development:
   <<: *default
   pool: 5
@@ -20,4 +21,4 @@ test:
 
 production:
   <<: *default
-  port: 5953
+
