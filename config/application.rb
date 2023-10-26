@@ -36,6 +36,9 @@ module CriminalHunter
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    config.rollbar.access_token = '1e169a2fbd944f54a044b6045631a34f'
+    config.middleware.use "Rollbar::Middleware::Rack"
+
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
