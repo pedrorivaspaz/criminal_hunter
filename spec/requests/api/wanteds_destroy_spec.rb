@@ -4,7 +4,7 @@ require 'swagger_helper'
 RSpec.describe '/api/wanteds/{id}', type: :request do
 
   let(:access_token) { Base64::encode64("Criminal-Hunter:Wanteds") }
-  let(:authorization) { "Basic #{access_token}" }
+  let(:Authorization) { "Basic #{access_token}" }
  
   path '/api/wanteds/{id}' do
     delete('Deleta procurados do sistema') do
@@ -12,7 +12,7 @@ RSpec.describe '/api/wanteds/{id}', type: :request do
       consumes 'application/json'
       produces 'application/json'
       security [basic_auth: []]
-      parameter name: :authorization, 
+      parameter name: :Authorization, 
                 in: :header, 
                 type: :string,
                 description: 'Token de autenticação padrão Basic Authentication composto por username e password',

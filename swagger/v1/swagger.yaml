@@ -106,7 +106,7 @@ paths:
       security:
       - basic_auth: []
       parameters:
-      - name: authorization
+      - name: Authorization
         in: header
         description: Token de autenticação padrão Basic Authentication composto por
           username e password
@@ -131,7 +131,7 @@ paths:
       security:
       - basic_auth: []
       parameters:
-      - name: authorization
+      - name: Authorization
         in: header
         description: Token de autenticação padrão Basic Authentication composto por
           username e password
