@@ -6,12 +6,6 @@ Rails.application.routes.draw do
       end
     end
   end
-  # Devise
-  devise_for :users, controllers: {
-  sessions: 'users/sessions',
-  registrations: 'users/registrations'
-}
-
 
   # Swagger
   mount Rswag::Ui::Engine => '/api-docs'
