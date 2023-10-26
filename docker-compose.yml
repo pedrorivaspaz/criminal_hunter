@@ -22,7 +22,7 @@ services:
     restart: always
     image: postgres:13.7
     ports:
-      - "5435:5432"
+      - "5953:5432"
     volumes:
       - ./postgres:/var/lib/postgresql/data
     environment:
