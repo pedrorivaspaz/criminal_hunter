@@ -9,7 +9,6 @@ default: &default
 
 development:
   <<: *default
-  pool: 5
   database: myapp_development
   host: db
   username: postgres
@@ -18,7 +17,6 @@ development:
 
 test:
   <<: *default
-  pool: 5
   database: myapp_test
   host: db
   username: postgres
