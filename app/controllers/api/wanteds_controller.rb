@@ -47,6 +47,7 @@ module Api
     # DELETE /wanteds/1
     def destroy
       @wanted.destroy
+      render json: {message: 'Regsitro deletado com sucesso'}
     end
 
     # GET /wanteds/search
