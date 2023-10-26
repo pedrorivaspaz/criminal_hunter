@@ -9,7 +9,8 @@ RSpec.describe '/api/wanteds', type: :request do
       tags 'Procurados'
       consumes 'application/json'
       produces 'application/json'
- 
+      
+      security [Bearer: []]
 
       response 200, 'successful' do
         let(:wanteds) { create_list(:wanted) }

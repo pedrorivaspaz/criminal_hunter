@@ -20,4 +20,4 @@ COPY . .
 EXPOSE 3000
 
 # Inicialize o aplicativo
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD "./start.sh"

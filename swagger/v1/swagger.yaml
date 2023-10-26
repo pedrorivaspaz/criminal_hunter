@@ -104,7 +104,7 @@ paths:
       tags:
       - Procurados
       security:
-      - basic_auth: []
+      - bearer_token: []
       parameters:
       - name: Authorization
         in: header
@@ -372,6 +372,8 @@ paths:
       summary: Lista procurados do sistema
       tags:
       - Procurados
+      security:
+      - Bearer: []
       responses:
         '200':
           description: successful

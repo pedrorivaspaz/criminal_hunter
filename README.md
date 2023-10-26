@@ -22,6 +22,12 @@ $ ./configure.sh
 
 ##### **VSCode**
 
+## Como iniciar o docker
+
+```
+$ service docker start
+```
+
 ## Como subir o projeto
 
 ```

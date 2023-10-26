@@ -9,6 +9,13 @@ RSpec.describe '/api/wanteds/{id}', type: :request do
       tags 'Procurados'
       consumes 'application/json'
       produces 'application/json'
+
+      security [bearer_token: []]
+      parameter name: :Authorization, 
+                in: :header, 
+                type: :string,
+                description: 'Token de autenticação padrão Basic Authentication composto por username e password',
+                required: true
  
       parameter name: :id,
                 in: :path,

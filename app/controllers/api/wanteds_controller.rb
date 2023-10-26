@@ -1,9 +1,10 @@
 class Api::WantedsController < ApplicationController
   include Pagy::Backend
 
+  before_action :authenticate, only: [:create, :update, :destroy ]
+
   before_action :set_wanted, only: [:show, :update, :destroy]
   before_action :set_wanteds, only: [:index, :search]
-  before_action :authenticate_user!, only: [ :create, :update, :destroy]
 
   # GET /wanteds
   def index
@@ -73,5 +74,29 @@ end
 
     def wanted_params
       params.require(:wanted).permit(:nome, :data_aniversario_usada, :cabelo, :olhos, :sexo, :peso, :altura, :raca, :nacionalidade, :crime, :url_foto, :origem)
+    end
+
+    def authenticate
+      header = request.headers['Authorization']
+      4.times {p '-'*40 }
+      # pp request.headers.to_h.keys
+      header = header.split(' ').last if header
+      pp header
+      4.times {p '-'*40 }
+      if token_invalid?(header)
+        render json: { errors: 'Not authorized' }, status: :unauthorized and return
+      end
+    end
+
+    def token_invalid?(header)
+      return true if header.blank?
+
+      return true if header != bearer_token
+
+      false
+    end
+
+    def bearer_token
+      ENV['BEARER_TOKEN']
     end
 end
