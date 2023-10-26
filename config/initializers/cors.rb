@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "http://localhost:3000", "https://criminal-hunter.vercel.app", "https://criminalhunter-production.up.railway.app/api-docs/index.html"
+    origins "http://localhost:3000", "https://criminal-hunter.vercel.app", "https://criminalhunter-production.up.railway.app/api-docs/index.html", "http://localhost:3000/api/wanteds"
 
     resource "*",
       headers: :any,
