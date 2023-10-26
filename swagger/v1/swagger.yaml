@@ -104,7 +104,7 @@ paths:
       tags:
       - Procurados
       security:
-      - bearer_token: []
+      - basic_auth: []
       parameters:
       - name: Authorization
         in: header
@@ -130,7 +130,16 @@ paths:
       summary: Atualiza procurados do sistema
       tags:
       - Procurados
+      security:
+      - basic_auth: []
       parameters:
+      - name: Authorization
+        in: header
+        description: Token de autenticação padrão Basic Authentication composto por
+          username e password
+        required: true
+        schema:
+          type: string
       - name: id
         in: path
         description: Parâmetro ID para filtrar procurados
@@ -310,7 +319,16 @@ paths:
       summary: Cria procurados no sistema
       tags:
       - Procurados
-      parameters: []
+      security:
+      - basic_auth: []
+      parameters:
+      - name: Authorization
+        in: header
+        description: Token de autenticação padrão Basic Authentication composto por
+          username e password
+        required: true
+        schema:
+          type: string
       responses:
         '201':
           description: successful

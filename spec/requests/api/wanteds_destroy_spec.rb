@@ -9,8 +9,7 @@ RSpec.describe '/api/wanteds/{id}', type: :request do
       tags 'Procurados'
       consumes 'application/json'
       produces 'application/json'
-
-      security [bearer_token: []]
+      security [basic_auth: []]
       parameter name: :Authorization, 
                 in: :header, 
                 type: :string,
