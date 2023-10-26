@@ -3,7 +3,7 @@ module Api
     include Pagy::Backend
     include ActionController::HttpAuthentication::Basic::ControllerMethods
     
-    before_action :authenticate, only: [:index, :create, :update, :destroy ]
+    before_action :authenticate, only: [:create, :update, :destroy ]
     before_action :set_wanted, only: [:show, :update, :destroy]
     before_action :set_wanteds, only: [:index, :search]
 
@@ -29,7 +29,7 @@ module Api
       @wanted = Wanted.new(wanted_params)
 
       if @wanted.save
-        render json: @wanted, status: :created, location: @wanted
+        render json: @wanted, status: :created, location: api_wanted_path(@wanted)
       else
         render json: @wanted.errors, status: :unprocessable_entity
       end

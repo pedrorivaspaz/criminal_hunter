@@ -3,7 +3,9 @@ require 'swagger_helper'
 # to update api-doc: bundle exec rake rswag:specs:swaggerize
 RSpec.describe '/api/wanteds', type: :request do
 
- 
+  let(:access_token) { Base64::encode64("Criminal-Hunter:Wanteds") }
+  let(:Authorization) { "Basic #{access_token}" }
+
   path '/api/wanteds' do
     post('Cria procurados no sistema') do
       tags 'Procurados'
@@ -86,7 +88,6 @@ RSpec.describe '/api/wanteds', type: :request do
         
       response 201, 'successful' do
         let(:wanteds) { FactoryBoy.attributes_for(:wanted) }
-        let(:id) {wanted.id}
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {

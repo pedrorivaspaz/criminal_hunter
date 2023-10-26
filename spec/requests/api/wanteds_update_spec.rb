@@ -3,6 +3,8 @@ require 'swagger_helper'
 # to update api-doc: bundle exec rake rswag:specs:swaggerize
 RSpec.describe '/api/wanteds/{id}', type: :request do
 
+    let(:access_token) { Base64::encode64("#{ENV['USERNAME_SYNERGIA']}:#{ENV['PASSWORD_SYNERGIA']}") }
+    let(:authorization) { "Basic #{access_token}" }
  
   path '/api/wanteds/{id}' do
     put('Atualiza procurados do sistema') do
@@ -10,8 +12,8 @@ RSpec.describe '/api/wanteds/{id}', type: :request do
       consumes 'application/json'
       produces 'application/json'
       security [basic_auth: []]
-      parameter name: :Authorization, 
-                in: :header, 
+      parameter name: :authorization,
+                in: :header,
                 type: :string,
                 description: 'Token de autenticação padrão Basic Authentication composto por username e password',
                 required: true
@@ -25,7 +27,7 @@ RSpec.describe '/api/wanteds/{id}', type: :request do
       
 
       response 200, 'successful' do
-        let(:wanteds) { create_list(:wanted) }
+        let(:wanted) { create_list(:wanted) }
         let(:id) {wanted.id}
         after do |example|
           example.metadata[:response][:content] = {

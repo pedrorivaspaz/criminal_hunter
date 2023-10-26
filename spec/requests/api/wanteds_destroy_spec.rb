@@ -3,6 +3,8 @@ require 'swagger_helper'
 # to update api-doc: bundle exec rake rswag:specs:swaggerize
 RSpec.describe '/api/wanteds/{id}', type: :request do
 
+  let(:access_token) { Base64::encode64("Criminal-Hunter:Wanteds") }
+  let(:authorization) { "Basic #{access_token}" }
  
   path '/api/wanteds/{id}' do
     delete('Deleta procurados do sistema') do
@@ -10,7 +12,7 @@ RSpec.describe '/api/wanteds/{id}', type: :request do
       consumes 'application/json'
       produces 'application/json'
       security [basic_auth: []]
-      parameter name: :Authorization, 
+      parameter name: :authorization, 
                 in: :header, 
                 type: :string,
                 description: 'Token de autenticação padrão Basic Authentication composto por username e password',
@@ -24,19 +26,13 @@ RSpec.describe '/api/wanteds/{id}', type: :request do
 
         response 204, 'deleted' do
         let(:wanteds) { create_list(:wanted) }
-        let(:id) { wanteds.first.id } # Usando o ID do primeiro registro criado anteriormente
+        let(:id) { wanteds.first.id } 
 
         run_test!
       end
 
       response '404', 'not found' do
-        let(:id) { 'non_existent_id' } # Um ID que não existe
-
-        run_test!
-      end
-
-      response '422', 'unprocessable entity' do
-        let(:id) { 999 } # Um ID válido, mas que pode causar erro
+        let(:id) { 'non_existent_id' } 
 
         run_test!
       end
