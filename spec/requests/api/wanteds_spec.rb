@@ -10,7 +10,12 @@ RSpec.describe '/api/wanteds', type: :request do
       consumes 'application/json'
       produces 'application/json'
       
-      security [Bearer: []]
+        parameter name: :page,
+                in: :query,
+                type: :integer,
+                description: 'Navega entre paginas para trazer os resultados paginados',
+                required: false
+
 
       response 200, 'successful' do
         let(:wanteds) { create_list(:wanted) }

@@ -10,7 +10,7 @@ module Api
     # GET /wanteds
     def index
       begin
-        pagy, @wanteds = pagy(Wanted.order(:id), items: 20)
+        pagy, @wanteds = pagy(Wanted.order(:id), items: 25)
         render json: @wanteds
       rescue Pagy::OverflowError
         render json: { error: "A página procurada não existe." }, status: :not_found

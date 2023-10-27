@@ -9,17 +9,18 @@ RSpec.describe '/api/wanteds/search?nome={nome}', type: :request do
       tags 'Procurados'
       consumes 'application/json'
       produces 'application/json'
-#     security [basic_auth: []]
-#      parameter name: :authorization,
-#                in: :header,
-#                type: :string,
-#                description: 'Token de autenticação padrão Basic Authentication composto por username e password',
-#                required: true
       parameter name: :nome,
                 in: :query,
                 type: :string,
                 description: 'Nome do procurado',
                 required: true
+
+      parameter name: :page,
+                in: :query,
+                type: :integer,
+                description: 'Navega entre paginas para trazer os resultados paginados',
+                required: false
+
 
       response 404, 'not_found' do
         let!(:id) { 1000000000 }

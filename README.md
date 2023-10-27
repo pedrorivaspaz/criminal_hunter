@@ -22,6 +22,13 @@ $ ./configure.sh
 
 ##### **VSCode**
 
+## Após instalar o docker
+
+```
+$ docker-compose build
+```
+
+
 ## Como iniciar o docker
 
 ```
