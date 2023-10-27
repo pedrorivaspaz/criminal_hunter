@@ -33,6 +33,7 @@ gem 'faraday'
 gem 'pagy'
 gem 'pg'
 gem 'rack-cors', require: 'rack/cors'
+gem 'rollbar'
 
 #Swagger documentation
 gem 'rswag'
