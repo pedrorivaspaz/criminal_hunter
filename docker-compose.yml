@@ -16,6 +16,23 @@ services:
       - gems_web:/usr/local/bundle
     depends_on:
       - db
+      - sidekiq
+
+  sidekiq:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec sidekiq -C config/sidekiq.yml"
+    volumes:
+      - '.:/app'
+    depends_on:
+      - 'db'
+      - 'redis'
+
+  redis:
+    restart: always
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
   db:
     restart: always
     image: postgres:13.7

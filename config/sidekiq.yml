@@ -1,0 +1,8 @@
+# sidekiq -C config/sidekiq.yml
+production:
+  :queues:
+    - [ high, 4 ]
+  :redis_url: <%= ENV['REDIS_SIDEKIQ_URL'] || 'redis://{host}/12' %>
+development:
+  :queues:
+    - [ high, 4 ]

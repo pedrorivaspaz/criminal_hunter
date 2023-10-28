@@ -34,6 +34,7 @@ gem 'pagy'
 gem 'pg'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rollbar'
+gem 'sidekiq'
 
 #Swagger documentation
 gem 'rswag'
