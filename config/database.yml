@@ -1,27 +1,27 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  port: 5432
-
-
-development:
-  <<: *default
-  database: myapp_development
-  username: postgres
-  password: 
-  host: db
-
-test:
-  <<: *default
-  database: myapp_test
-  username: postgres
-  password: 
-
-production:
-  <<: *default
   database: <%= ENV['PRODUCTION_DB'] %>
   host:     <%= ENV['PRODUCTION_HOST'] %>
   username: <%= ENV['PRODUCTION_USERNAME'] %>
   password: <%= ENV['PRODUCTION_PASSWORD'] %>
   port: 5953
+
+
+development:
+  <<: *default
+#  database: myapp_development
+#  username: postgres
+#  password: 
+#  host: db
+
+test:
+  <<: *default
+#  database: myapp_test
+# username: postgres
+#  password: 
+
+production:
+  <<: *default
+
 
