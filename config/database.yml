@@ -1,10 +1,10 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  database: <%= ENV['PRODUCTION_DB'] %>
-  host:     <%= ENV['PRODUCTION_HOST'] %>
-  username: <%= ENV['PRODUCTION_USERNAME'] %>
-  password: <%= ENV['PRODUCTION_PASSWORD'] %>
+  database: railway
+  host:     containers-us-west-106.railway.app
+  username: postgres
+  password: X0I0RqHfa7LPZB1IEBdl
   port: 5953
 
 
