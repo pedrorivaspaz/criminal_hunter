@@ -1,11 +1,11 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  host: containers-us-west-106.railway.app
+  port: 5953
   database: railway
-  host:     containers-us-west-106.railway.app
   username: postgres
   password: X0I0RqHfa7LPZB1IEBdl
-  port: 5953
 
 
 development:
